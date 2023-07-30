@@ -1,19 +1,15 @@
 import "./App.css";
-import About from "./components/About";
-import Banner from './components/Banner';
-import Content from "./components/Content";
-import Footer from "./components/Footer";
-import Purchase from "./components/Purchase";
+
+import { useSessionStorage } from "react-unique-hooks";
+import Login from "./components/Login";
+import Main from "./components/Main";
 
 function App() {
+    const [auth, setAuth, logout] = useSessionStorage<string>("x-access-token", "");
     return (
-        <>
-            <Banner />
-            <Content />
-            <Purchase />
-            <About />
-            <Footer />
-        </>
+        <section className="bg-[#cbd6cc]">
+            {auth ? <Main out={logout} /> : <Login set={setAuth} />}
+        </section>
     );
 }
 
